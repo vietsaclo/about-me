@@ -2,9 +2,10 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <link rel="icon" type="image/png" href="image/favicon.ico">
+    <link rel="icon" type="image/png" href="favicon.ico">
     <title>Tôi Yêu Bạn</title>
     <link type="text/css" rel="stylesheet" href="./renxi/default.css">
+    <link type="text/css" rel="stylesheet" href="./renxi/custom.css">
     <link type="text/css" rel="stylesheet" href="./renxi/scroll.css">
     <script type="text/javascript" src="./renxi/jquery.min.js"></script>
     <script type="text/javascript" src="./renxi/jscex.min.js"></script>
@@ -23,32 +24,31 @@
 </head>
 
 <body scroll="no" style="overflow: hidden" bottom="50">
-    <audio autoplay>
-        <source src="music/ido.mp3" type="audio/mp3">
-    </audio>
-    <div id="main">
+    <audio controls id="music-audio" style="display: none;" src="music/ido.mp3" type="audio/mp3"></audio>
+    <div id="main pos-rel">
         <div id="error">Trình duyệt của bạn không được hỗ trợ. Sử
             dụng (<a href="http://www.google.cn/chrome">Chrome</a>) và (<a
                 href="http://firefox.com/download/">Firefox</a>)</div>
+        <img id="music-play" class="icon icon-play-music" src="images/icons/play.png" alt="icon_play_music" />
         <div id="wrap">
             <div id="text">
                 <div id="code">
-                    <font color="#3498db"><span class="say">Trọng Nghĩa,</span><br>
+                    <font color="#3498db"><span class="say">VietSaclo...,</span><br>
                         <span class="say"> </span><br>
-                        <span class="say">Anh đã yêu cưng trên 1 chuyến xe bus :3</span><br>
-                        <span class="say">Cưng rất dễ thương !</span><br>
-                        <span class="say">Mỗi tội mất nết... :v !</span><br>
-                        <span class="say">Anh không ngờ chúng ta lại có những điểm giống nhau?</span><br>
-                        <span class="say">..."Từ khi yêu Trọng Nghĩa, Nghĩa mạnh mẽ hẳn lên"</span><br>
-                        <span class="say">Vy Nghĩa sẽ cứ sẽ chấp mà yêu Trọng Nghĩa &lt;3</span><br>
-                        <span class="say">Hãy cứ tin Nghĩa nhé. 'Vy Nghĩa sẽ chiếm lấy trái tim của Trọng Nghĩa'
-                            ---</span><br>
+                        <span class="say">Anh đã yêu em kể từ lần gặp đầu tiên :3</span><br>
+                        <span class="say">Nhìn em rất là cute !</span><br>
+                        <span class="say">Nhưng mỗi tội hay khóc nhè... :v !</span><br>
+                        <span class="say">Anh không ngờ chúng ta lại có những điểm giống nhau như vậy?</span><br>
+                        <span class="say">..."Từ khi yêu VietSaclo, VietNguyen mẽ hẳn lên"</span><br>
+                        <span class="say">Viet Nguyen sẽ cố chấp mà yêu VietSaclo &lt;3</span><br>
+                        <span class="say">Hãy cứ tin nhé. 'Viet Nguyen sẽ chiếm lấy trái tim của VietSaclo'
+                            --- (Forever Alone :v)</span><br>
                         <span class="say"> </span><br>
-                        <span class="say"><span class="space"></span> -- Vy Nghĩa ❤ Trọng Nghĩa
+                        <span class="say"><span class="space"></span> -- Viet Nguyen ❤ VietSaclo
                             --</span></br><br><br><br>
-                        <span class="say"><b>© 2016 Vy Nghĩa Animation Desniger</b></span><br>
-                        <span class="say"><b>Facebook:</b> https://www.facebook.com/VyNghiaTN</span><br>
-                        <span class="say"><b>Đồ họa:</b> Nguyễn Quốc Huy</span><br>
+                        <span class="say"><b>© 2022 Viet Nguyen IT</b></span><br>
+                        <span class="say"><b>Facebook:</b> https://www.facebook.com/vietsaclo</span><br>
+                        <span class="say"><b>Đồ họa:</b> Tung Của</span><br>
                         <span class="say"><b>Bài hát:</b> I Do - 991 </span>
                     </font>
                     <p></p>
@@ -56,7 +56,7 @@
             </div>
             <div id="clock-box">
                 <span class="STYLE1"></span>
-                <font color="#FF0000">Vy Nghĩa ❤ Trọng Nghĩa</font>
+                <font color="#FF0000">Viet Nguyen ❤ VietSaclo</font>
                 <span class="STYLE1"> trong: <span>
                         <div id="clock"></div>
             </div>
@@ -127,6 +127,7 @@
             var hold = 1;
 
             canvas.click(function (e) {
+                window.playMusic();
                 var offset = canvas.offset(), x, y;
                 x = e.pageX - offset.left;
                 y = e.pageY - offset.top;
@@ -229,10 +230,33 @@
         })();
     </script>
     <div style="text-align:center;margin:0px 0; font:normal 14px/24px 'MicroSoft YaHei';">
-        <p>© 2023 Vietsaclo</p>
+        <p>© 2022 NGUYEN QUOC VIET</p>
     </div>
 
+    <script>
+        $(document).ready(() => {
+            window.playMusic = () => {
+                var audio = $('#music-audio');
+                if (audio && audio.get(0)) {
+                    audio = audio.get(0);
+                    
+                    let imgSource = '';
+                    if (audio.paused) {
+                        audio.play();
+                        imgSource = 'images/icons/pause.png';
+                    } else {
+                        audio.pause();
+                        imgSource = 'images/icons/play.png';
+                    }
+                    $('#music-play').get(0).src = imgSource;
+                }
+            }
 
+            $('#music-play').click(() => {
+                window.playMusic();
+            });
+        })
+    </script>
 </body>
 <div></div>
 

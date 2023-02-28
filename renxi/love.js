@@ -168,8 +168,8 @@
 
             ctx.moveTo(0, 0);
             ctx.scale(0.75, 0.75);
-            ctx.font = "12px 微软雅黑,Verdana";
-            ctx.fillText("Vy Nghĩa", 23, 10);
+            ctx.font = "10px 微软雅黑,Verdana";
+            ctx.fillText("Chạm Vào Đây", 23, 10);
             ctx.restore();
         },
         clear: function() {
