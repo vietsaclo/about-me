@@ -1,0 +1,15 @@
+.icon {
+    width: 20px;
+    height: 20px;
+}
+
+.pos-rel {
+    position: relative;
+}
+
+.icon-play-music {
+    position: absolute;
+    top: 50px;
+    left: 50px;
+    cursor: pointer;
+}
