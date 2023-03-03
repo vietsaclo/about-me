@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="icon" type="image/png" href="favicon.ico">
-    <title>Tôi Yêu Bạn</title>
+    <title>Tôi's Nhật Ký</title>
     <link type="text/css" rel="stylesheet" href="./renxi/default.css">
     <link type="text/css" rel="stylesheet" href="./renxi/custom.css">
     <link type="text/css" rel="stylesheet" href="./renxi/scroll.css">
@@ -29,7 +29,16 @@
         <div id="error">Trình duyệt của bạn không được hỗ trợ. Sử
             dụng (<a href="http://www.google.cn/chrome">Chrome</a>) và (<a
                 href="http://firefox.com/download/">Firefox</a>)</div>
-        <img id="music-play" class="icon icon-play-music" src="images/icons/play.png" alt="icon_play_music" />
+        <div id="container-play-music">
+            <img id="music-play" class="icon icon-play-music" src="images/icons/play.png" alt="icon_play_music" />
+            <div id='container-wave' class="d-none">  
+                <span></span>  
+                <span></span>  
+                <span></span>  
+                <span></span>  
+                <span></span>  
+              </div>
+        </div>
         <div id="wrap">
             <div id="text">
                 <div id="code">
@@ -237,7 +246,7 @@
 
     <script>
         $(document).ready(() => {
-            window.playMusic = () => {
+            window.playMusic = (canPauseByClick = false) => {
                 var audio = $('#music-audio');
                 if (audio && audio.get(0)) {
                     audio = audio.get(0);
@@ -246,16 +255,19 @@
                     if (audio.paused) {
                         audio.play();
                         imgSource = 'images/icons/pause.png';
-                    } else {
+                        $('#container-wave').removeClass('d-none').addClass('d-block');
+                    } else if (canPauseByClick) {
                         audio.pause();
                         imgSource = 'images/icons/play.png';
+                        $('#container-wave').removeClass('d-block').addClass('d-none');
                     }
-                    $('#music-play').get(0).src = imgSource;
+                    if (imgSource)
+                        $('#music-play').get(0).src = imgSource;
                 }
             }
 
             $('#music-play').click(() => {
-                window.playMusic();
+                window.playMusic(true);
             });
         })
     </script>
