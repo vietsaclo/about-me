@@ -21,6 +21,18 @@
             color: #666666
         }
     </style>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GV4W5RHFC0"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-GV4W5RHFC0');
+
+        window.gtag = gtag;
+    </script>
 </head>
 
 <body scroll="no" style="overflow: hidden" bottom="50">
@@ -138,7 +150,7 @@
             var hold = 1;
 
             canvas.click(function (e) {
-                window.playMusic();
+                window.playMusic(false, 'click_heart_button');
                 var offset = canvas.offset(), x, y;
                 x = e.pageX - offset.left;
                 y = e.pageY - offset.top;
@@ -246,7 +258,16 @@
 
     <script>
         $(document).ready(() => {
-            window.playMusic = (canPauseByClick = false) => {
+            window.sendEventClick = (action_name, category_name, label_name) => {
+                const gtag = window.gtag;
+                if (!gtag) return;
+                gtag('event', action_name, {
+                    'event_category' : category_name,
+                    'event_label' : label_name,
+                });
+            }
+
+            window.playMusic = (canPauseByClick = false, action_name = 'click_play_music_button') => {
                 var audio = $('#music-audio');
                 if (audio && audio.get(0)) {
                     audio = audio.get(0);
@@ -256,10 +277,12 @@
                         audio.play();
                         imgSource = 'images/icons/pause.png';
                         $('#container-wave').removeClass('d-none').addClass('d-block');
+                        window.sendEventClick(action_name, 'start_stop', 'user_click_in_screen');
                     } else if (canPauseByClick) {
                         audio.pause();
                         imgSource = 'images/icons/play.png';
                         $('#container-wave').removeClass('d-block').addClass('d-none');
+                        window.sendEventClick('click_pause_music_button', 'start_stop', 'user_click_in_screen');
                     }
                     if (imgSource)
                         $('#music-play').get(0).src = imgSource;
