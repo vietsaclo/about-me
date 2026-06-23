@@ -11,7 +11,3 @@ $('#login-button').click(function (event) {
     alert("Wrong Password");
   }
 });
-
-// $('#login-button').click(function (event) {
-//   setTimeout(function () { location.href = "BirthdayCake.html"; }, 2000);
-// });
